@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "getting-started",
+    "title": "Getting Started with Static Sites",
+    "date": "2026-01-23"
+  },
+  {
+    "slug": "hello-world",
+    "title": "Hello World: Welcome to My Blog",
+    "date": "2026-01-23"
+  },
+  {
+    "slug": "on-writing",
+    "title": "On Writing and Thinking",
+    "date": "2026-01-20"
+  },
+  {
+    "slug": "simple-websites",
+    "title": "Why Simple Websites Win",
+    "date": "2026-01-15"
+  }
+]

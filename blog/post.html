@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading... - Your Name</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <!-- zero-md -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
+</head>
+<body>
+
+<article id="post">
+  <p class="muted" id="date"></p>
+  <h1 id="title">Loading...</h1>
+  <zero-md id="content">
+    <template data-append>
+      <style>
+        .markdown-body { 
+          font-family: 'Newsreader', Georgia, serif;
+          font-size: 1.1rem;
+          line-height: 1.7;
+          color: #222;
+          background: transparent;
+        }
+        .markdown-body h1 { display: none; }
+        .markdown-body h2 { font-size: 1.1rem; font-weight: 500; margin: 2rem 0 1rem; }
+        .markdown-body a { color: #1a0dab; }
+        .markdown-body blockquote { border-left: 2px solid #ddd; padding-left: 1rem; color: #666; }
+        .markdown-body code { background: #EFE4D4; padding: 0.15em 0.3em; border-radius: 3px; }
+        .markdown-body ul { margin-left: 1.25rem; }
+        .markdown-body img { max-width: 100%; border-radius: 4px; }
+      </style>
+    </template>
+  </zero-md>
+</article>
+
+<p class="back"><a href="../index.html">← back</a></p>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const post = params.get('p');
+  
+  if (post) {
+    // Load the markdown file
+    document.getElementById('content').setAttribute('src', `posts/${post}.md`);
+    
+    // Fetch frontmatter (title, date) from the md file
+    fetch(`posts/${post}.md`)
+      .then(r => r.text())
+      .then(text => {
+        // Extract title from first # heading
+        const titleMatch = text.match(/^#\s+(.+)$/m);
+        if (titleMatch) {
+          document.getElementById('title').textContent = titleMatch[1];
+          document.title = titleMatch[1] + ' - Your Name';
+        }
+        
+        // Extract date from <!-- date: YYYY-MM-DD --> comment
+        const dateMatch = text.match(/<!--\s*date:\s*(\d{4}-\d{2}-\d{2})\s*-->/);
+        if (dateMatch) {
+          const date = new Date(dateMatch[1]);
+          document.getElementById('date').textContent = date.toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric'
+          });
+        }
+      });
+    
+    // Render KaTeX after markdown loads
+    document.getElementById('content').addEventListener('zero-md-rendered', () => {
+      const md = document.getElementById('content').shadowRoot.querySelector('.markdown-body');
+      if (md && window.renderMathInElement) {
+        renderMathInElement(md, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  } else {
+    document.getElementById('title').textContent = 'Post not found';
+  }
+</script>
+
+</body>
+</html>

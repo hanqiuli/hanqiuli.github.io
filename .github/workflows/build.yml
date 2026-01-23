@@ -1,0 +1,30 @@
+name: Build Posts Index
+
+on:
+  push:
+    paths:
+      - 'blog/posts/*.md'
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Build posts.json
+        run: node build.js
+      
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add blog/posts.json
+          git diff --staged --quiet || git commit -m "Update posts.json"
+          git push

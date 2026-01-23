@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name</title>
+  <meta name="description" content="Personal website of Your Name">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Your Name</h1>
+
+<p>
+  I'm a researcher and developer working on [your field]. Currently at [Institution], 
+  I explore the intersection of [Area 1] and [Area 2]. I believe in open science 
+  and sharing knowledge through writing.
+</p>
+
+<div class="links">
+  <a href="cv.html">cv</a>
+  <a href="projects.html">projects</a>
+</div>
+
+<hr>
+
+<h2>Posts</h2>
+
+<ul class="post-list" id="posts"></ul>
+
+<hr>
+
+<div class="links small">
+  <a href="mailto:your.email@example.com">email</a>
+  <a href="https://github.com/yourusername">github</a>
+  <a href="https://linkedin.com/in/yourusername">linkedin</a>
+</div>
+
+<script>
+  fetch('blog/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      const list = document.getElementById('posts');
+      posts
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .forEach(post => {
+          const date = new Date(post.date);
+          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          list.innerHTML += `
+            <li>
+              <span class="date">${dateStr}</span>
+              <a href="blog/post.html?p=${post.slug}">${post.title}</a>
+            </li>
+          `;
+        });
+    });
+</script>
+
+</body>
+</html>
