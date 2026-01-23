@@ -9,6 +9,14 @@ const outputFile = path.join(__dirname, 'blog', 'posts.json');
 
 const posts = [];
 
+// Create directories if they don't exist
+if (!fs.existsSync(path.join(__dirname, 'blog'))) {
+  fs.mkdirSync(path.join(__dirname, 'blog'));
+}
+if (!fs.existsSync(postsDir)) {
+  fs.mkdirSync(postsDir);
+}
+
 // Read all .md files
 const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
 
