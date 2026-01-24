@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes - Hanqiu Li Cai</title>
+  <meta name="description" content="Technical notes by Hanqiu Li Cai">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Notes</h1>
+
+<p>
+  This is the collection of summaries and notes on technical topics that I work on.
+</p>
+
+<ul class="post-list" id="posts"></ul>
+
+<p class="back"><a href="index.html">← back</a></p>
+
+<script>
+  fetch('notes/posts.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(posts => {
+      const list = document.getElementById('posts');
+      posts
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .forEach(post => {
+          const date = new Date(post.date);
+          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          list.innerHTML += `
+            <li>
+              <span class="date">${dateStr}</span>
+              <a href="notes/post.html?p=${post.slug}">${post.title}</a>
+            </li>
+          `;
+        });
+    });
+</script>
+
+</body>
+</html>

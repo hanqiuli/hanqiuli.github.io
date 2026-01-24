@@ -12,11 +12,19 @@
 <h1>Hanqiu Li Cai</h1>
 
 <p>
-  Welcome to my little backyard of thoughts and experiences! I'm Li, a 2nd year MSc student 
-  in Robotics, Systems and Control at <a href="https://ethz.ch">ETH Zürich</a>. Previously, 
-  I worked at Fiducial as a 3D Vision Engineer, developing software for drone autonomy. 
-  My current interests lie in the intersection of AI, robotics and content creation. 
-  On this page you can find my past projects as well as blogposts of my learning journey / personal thoughts.
+  I'm a 2nd-year MSc student in Robotics, Systems and Control at <a href="https://ethz.ch">ETH Zürich</a>. 
+  Previously, I worked as a 3D Vision Engineer at Fiducial, developing software for drone autonomy. 
+  My research and engineering interests span Computer Vision, Robotics, and GenAI for content creation.
+</p>
+
+<p>
+  This site has two kinds of content:<br>
+  <a href="notes.html">Notes</a> — concise technical writing on robotics, AI, experiments, and learnings.<br>
+  <a href="thoughts.html">Thoughts</a> — personal reflections, decisions, and the human side of building in tech.
+</p>
+
+<p>
+  Some of this is polished; some of it is intentionally informal — all of it is part of my learning journey.
 </p>
 
 <div class="links">
@@ -26,37 +34,11 @@
 
 <hr>
 
-<h2>Posts</h2>
-
-<ul class="post-list" id="posts"></ul>
-
-<hr>
-
 <div class="links small">
   <a href="mailto:hanqiulicai@gmail.com">email</a>
   <a href="https://github.com/hanqiuli">github</a>
   <a href="https://www.linkedin.com/in/hanqiu-li-cai/">linkedin</a>
 </div>
-
-<script>
-  fetch('blog/posts.json?t=' + Date.now())
-    .then(r => r.json())
-    .then(posts => {
-      const list = document.getElementById('posts');
-      posts
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .forEach(post => {
-          const date = new Date(post.date);
-          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-          list.innerHTML += `
-            <li>
-              <span class="date">${dateStr}</span>
-              <a href="blog/post.html?p=${post.slug}">${post.title}</a>
-            </li>
-          `;
-        });
-    });
-</script>
 
 </body>
 </html>
