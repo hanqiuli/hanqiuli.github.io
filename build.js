@@ -21,8 +21,8 @@ function processCategory(category) {
 
   const posts = [];
 
-  // Read all .md files
-  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
+  // Read all .md files (exclude templates starting with _)
+  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md') && !f.startsWith('_'));
 
   for (const file of files) {
     const filePath = path.join(postsDir, file);
