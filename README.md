@@ -1,1 +1,1 @@
-Personal website repo. Totally not vibecoded with Cursor!
+A totally not vibecoded personal website
