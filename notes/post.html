@@ -14,32 +14,38 @@
 </head>
 <body>
 
+<div class="page">
 <article id="post">
   <p class="muted" id="date"></p>
   <h1 id="title">Loading...</h1>
   <zero-md id="content">
     <template data-append>
       <style>
-        .markdown-body { 
-          font-family: 'Newsreader', Georgia, serif;
-          font-size: 1.1rem;
+        .markdown-body {
+          font-family: 'Inter', -apple-system, sans-serif;
+          font-size: 0.95rem;
           line-height: 1.7;
-          color: #222;
+          color: #ffffff;
           background: transparent;
         }
         .markdown-body h1 { display: none; }
-        .markdown-body h2 { font-size: 1.1rem; font-weight: 500; margin: 2rem 0 1rem; }
-        .markdown-body a { color: #1a0dab; }
-        .markdown-body blockquote { border-left: 2px solid #ddd; padding-left: 1rem; color: #666; }
-        .markdown-body code { background: #EFE4D4; padding: 0.15em 0.3em; border-radius: 3px; }
-        .markdown-body ul { margin-left: 1.25rem; }
-        .markdown-body img { max-width: 100%; border-radius: 4px; }
+        .markdown-body h2 { font-size: 1rem; font-weight: 500; margin: 2rem 0 1rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.02em; font-size: 0.75rem; }
+        .markdown-body a { color: #ffffff; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(255,255,255,0.3); }
+        .markdown-body a:hover { text-decoration-color: rgba(255,255,255,0.85); }
+        .markdown-body blockquote { border-left: 2px solid rgba(255,255,255,0.1); padding-left: 1rem; color: rgba(255,255,255,0.5); font-style: italic; }
+        .markdown-body code { background: rgba(255,255,255,0.08); padding: 0.15em 0.35em; border-radius: 3px; font-size: 0.875em; }
+        .markdown-body ul, .markdown-body ol { margin-left: 1.25rem; margin-bottom: 1rem; }
+        .markdown-body li { margin-bottom: 0.25rem; }
+        .markdown-body p { margin-bottom: 1rem; }
+        .markdown-body img { max-width: 100%; border-radius: 4px; margin: 1rem 0; }
+        .markdown-body iframe { max-width: 100%; margin: 1rem 0; }
       </style>
     </template>
   </zero-md>
 </article>
 
 <p class="back"><a href="../notes.html">← back</a></p>
+</div>
 
 <script>
   const params = new URLSearchParams(window.location.search);
